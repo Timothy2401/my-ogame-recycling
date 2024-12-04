@@ -1,21 +1,21 @@
-// Ressourcen-Kosten für jedes Schiff
-const resources = [
-    { metal: 3000, crystal: 1000, deuterium: 0 },
-    { metal: 6000, crystal: 4000, deuterium: 0 },
-    { metal: 20000, crystal: 7000, deuterium: 2000 },
-    { metal: 45000, crystal: 15000, deuterium: 0 },
-    { metal: 30000, crystal: 10000, deuterium: 15000 },
-    { metal: 50000, crystal: 25000, deuterium: 15000 },
-    { metal: 60000, crystal: 50000, deuterium: 15000 },
-    { metal: 5000000, crystal: 4000000, deuterium: 1000000 },
-    { metal: 85000, crystal: 55000, deuterium: 20000 },
-    { metal: 8000, crystal: 15000, deuterium: 8000 },
-    { metal: 2000, crystal: 0, deuterium: 0 },
-    { metal: 3000, crystal: 2000, deuterium: 0 },
-    { metal: 10000, crystal: 0, deuterium: 0 },
-    { metal: 10000, crystal: 600, deuterium: 0 },
-    { metal: 1000, crystal: 1000, deuterium: 2000 }
-];
+// Beispielhafte Ressourcen-Kosten für jedes Schiff (Metall, Kristall, Deuterium)
+const shipCosts = {
+    "Leichter Jäger": { metal: 1250, crystal: 500, deuterium: 100 },
+    "Schwerer Jäger": { metal: 6000, crystal: 4000, deuterium: 1000 },
+    "Kreuzer": { metal: 2000, crystal: 2000, deuterium: 500 },
+    "Schlachtschiff": { metal: 7000, crystal: 4000, deuterium: 1000 },
+    "Schlachtkreuzer": { metal: 30000, crystal: 40000, deuterium: 15000 }, // Korrektur
+    "Bomber": { metal: 5000, crystal: 3000, deuterium: 1000 },
+    "Zerstörer": { metal: 6000, crystal: 2000, deuterium: 500 },
+    "Todesstern": { metal: 50000, crystal: 30000, deuterium: 10000 },
+    "Reaper": { metal: 10000, crystal: 10000, deuterium: 4000 },
+    "Pathfinder": { metal: 8000, crystal: 15000, deuterium: 8000 },
+    "K-Transporter": { metal: 2000, crystal: 2000, deuterium: 0 }, // Korrektur
+    "G-Transporter": { metal: 6000, crystal: 6000, deuterium: 0 }, // Korrektur
+    "Kolonieschiff": { metal: 10000, crystal: 20000, deuterium: 10000 }, // Korrektur
+    "Recycler": { metal: 10000, crystal: 6000, deuterium: 2000 }, // Korrektur
+    "Spionagesonde": { metal: 0, crystal: 1000, deuterium: 0 } // Korrektur
+};
 
 // Übersetzungen
 const translations = {
@@ -54,11 +54,13 @@ function calculateResources() {
     let totalKristall = 0;
     let totalDeuterium = 0;
 
-    for (let i = 0; i < resources.length; i++) {
+    for (let i = 0; i < shipCosts.length; i++) {
         let quantity = parseInt(document.getElementById(`input${i + 1}`).value) || 0;
-        totalMetall += resources[i].metal * quantity * percentage;
-        totalKristall += resources[i].crystal * quantity * percentage;
-        totalDeuterium += resources[i].deuterium * quantity * percentage;
+        let shipType = document.getElementById(`shipType${i + 1}`).textContent;
+
+        totalMetall += shipCosts[shipType].metal * quantity * percentage;
+        totalKristall += shipCosts[shipType].crystal * quantity * percentage;
+        totalDeuterium += shipCosts[shipType].deuterium * quantity * percentage;
     }
 
     // Mit Dezimaltrennzeichen formatieren
