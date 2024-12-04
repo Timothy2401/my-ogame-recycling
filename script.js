@@ -1,4 +1,4 @@
-// Beispielhafte Ressourcen-Kosten für jedes Schiff (Metall, Kristall, Deuterium)
+// Ressourcen-Kosten für jedes Schiff
 const shipCosts = {
     "Leichter Jäger": { metal: 3000, crystal: 1000, deuterium: 0 },
     "Schwerer Jäger": { metal: 6000, crystal: 4000, deuterium: 0 },
@@ -19,12 +19,13 @@ const shipCosts = {
 
 // Berechnung der Ressourcen
 function calculateResources() {
-    // Prozentsatz abrufen und validieren
-    let percentageInput = document.getElementById("percentage").value;
-    let percentage = parseFloat(percentageInput) / 100;
+    // Prozentsatz abrufen
+    const percentageInput = document.getElementById("percentage").value;
+    const percentage = parseFloat(percentageInput) / 100;
 
+    // Überprüfen, ob der Prozentsatz gültig ist
     if (isNaN(percentage) || percentage < 0.35 || percentage > 0.75) {
-        alert("Bitte einen gültigen Prozentsatz zwischen 35% und 75% eingeben.");
+        alert("Bitte geben Sie einen Prozentsatz zwischen 35% und 75% ein.");
         return;
     }
 
@@ -33,18 +34,19 @@ function calculateResources() {
     let totalKristall = 0;
     let totalDeuterium = 0;
 
-    // Iteration über alle Schiffe
-    Object.keys(shipCosts).forEach((shipType, index) => {
-        let inputElement = document.getElementById(`input${index + 1}`);
-        let quantity = parseInt(inputElement.value) || 0;
+    // Iteration über die Schiffe
+    Object.entries(shipCosts).forEach(([shipType, costs], index) => {
+        // Eingabewert abrufen
+        const inputField = document.getElementById(`input${index + 1}`);
+        const quantity = parseInt(inputField.value) || 0;
 
         // Ressourcenberechnung
-        totalMetall += shipCosts[shipType].metal * quantity * percentage;
-        totalKristall += shipCosts[shipType].crystal * quantity * percentage;
-        totalDeuterium += shipCosts[shipType].deuterium * quantity * percentage;
+        totalMetall += costs.metal * quantity * percentage;
+        totalKristall += costs.crystal * quantity * percentage;
+        totalDeuterium += costs.deuterium * quantity * percentage;
     });
 
-    // Ergebnisse in das HTML schreiben
+    // Ergebnisse anzeigen
     document.getElementById("resultMetall").textContent = totalMetall.toLocaleString('de-DE');
     document.getElementById("resultKristall").textContent = totalKristall.toLocaleString('de-DE');
     document.getElementById("resultDeuterium").textContent = totalDeuterium.toLocaleString('de-DE');
@@ -64,7 +66,7 @@ document.getElementById("language-select").addEventListener("change", function (
     document.querySelector("h2").textContent = t.resultTitle;
 
     // Schiffstypen
-    for (let i = 0; i < t.shipTypes.length; i++) {
-        document.getElementById(`shipType${i + 1}`).textContent = t.shipTypes[i];
-    }
+    t.shipTypes.forEach((type, index) => {
+        document.getElementById(`shipType${index + 1}`).textContent = type;
+    });
 });
