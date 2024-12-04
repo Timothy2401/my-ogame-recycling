@@ -6,7 +6,7 @@ const shipCosts = {
     "Schlachtschiff": { metal: 45000, crystal: 15000, deuterium: 0 },
     "Schlachtkreuzer": { metal: 30000, crystal: 40000, deuterium: 15000 },
     "Bomber": { metal: 50000, crystal: 25000, deuterium: 15000 },
-    "Zerstörer": { metal: 60000, crystal: 40000, deuterium: 15000 },
+    "Zerstörer": { metal: 60000, crystal: 50000, deuterium: 15000 },
     "Todesstern": { metal: 5000000, crystal: 4000000, deuterium: 1000000 },
     "Reaper": { metal: 85000, crystal: 55000, deuterium: 20000 },
     "Pathfinder": { metal: 8000, crystal: 15000, deuterium: 8000 },
