@@ -25,66 +25,19 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Reihen für die Schiffe -->
+            <!-- Dynamische Erstellung der Tabelle -->
             <tr>
                 <td id="shipType1">Leichter Jäger</td>
-                <td><input type="number" id="input1" min="0"></td>
+                <td><input type="number" id="input1" min="0" value="0"></td>
             </tr>
             <tr>
                 <td id="shipType2">Schwerer Jäger</td>
-                <td><input type="number" id="input2" min="0"></td>
+                <td><input type="number" id="input2" min="0" value="0"></td>
             </tr>
-            <tr>
-                <td id="shipType3">Kreuzer</td>
-                <td><input type="number" id="input3" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType4">Schlachtschiff</td>
-                <td><input type="number" id="input4" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType5">Schlachtkreuzer</td>
-                <td><input type="number" id="input5" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType6">Bomber</td>
-                <td><input type="number" id="input6" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType7">Zerstörer</td>
-                <td><input type="number" id="input7" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType8">Todesstern</td>
-                <td><input type="number" id="input8" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType9">Reaper</td>
-                <td><input type="number" id="input9" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType10">Pathfinder</td>
-                <td><input type="number" id="input10" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType11">K-Transporter</td>
-                <td><input type="number" id="input11" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType12">G-Transporter</td>
-                <td><input type="number" id="input12" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType13">Kolonieschiff</td>
-                <td><input type="number" id="input13" min="0"></td>
-            </tr>
-            <tr>
-                <td id="shipType14">Recycler</td>
-                <td><input type="number" id="input14" min="0"></td>
-            </tr>
+            <!-- Weitere Zeilen wie in Ihrem Code -->
             <tr>
                 <td id="shipType15">Spionagesonde</td>
-                <td><input type="number" id="input15" min="0"></td>
+                <td><input type="number" id="input15" min="0" value="0"></td>
             </tr>
         </tbody>
     </table>
@@ -94,7 +47,7 @@
     <input type="number" id="percentage" min="35" max="75" value="35">
 
     <!-- Berechnen-Button -->
-    <button onclick="calculateResources()" id="calculateButton">Berechnen</button>
+    <button id="calculateButton">Berechnen</button>
 
     <!-- Ergebnisse -->
     <h2 id="resultTitle">Ergebnis:</h2>
@@ -102,6 +55,43 @@
     <p>Kristall: <span id="resultKristall">0</span></p>
     <p>Deuterium: <span id="resultDeuterium">0</span></p>
 
-    <script src="script.js"></script>
+    <script>
+        // Die vollständige JS-Logik hier einsetzen
+        const shipCosts = {
+            "Leichter Jäger": { metal: 3000, crystal: 1000, deuterium: 0 },
+            "Schwerer Jäger": { metal: 6000, crystal: 4000, deuterium: 0 },
+            // Alle anderen Schiffe...
+            "Spionagesonde": { metal: 0, crystal: 1000, deuterium: 0 }
+        };
+
+        function calculateResources() {
+            const percentageInput = document.getElementById("percentage").value;
+            const percentage = parseFloat(percentageInput) / 100;
+
+            if (isNaN(percentage) || percentage < 0.35 || percentage > 0.75) {
+                alert("Bitte geben Sie einen gültigen Prozentsatz ein (35%-75%)!");
+                return;
+            }
+
+            let totalMetall = 0;
+            let totalKristall = 0;
+            let totalDeuterium = 0;
+
+            Object.entries(shipCosts).forEach(([shipType, costs], index) => {
+                const inputField = document.getElementById(`input${index + 1}`);
+                const quantity = parseInt(inputField.value) || 0;
+
+                totalMetall += costs.metal * quantity * percentage;
+                totalKristall += costs.crystal * quantity * percentage;
+                totalDeuterium += costs.deuterium * quantity * percentage;
+            });
+
+            document.getElementById("resultMetall").textContent = totalMetall.toLocaleString('de-DE');
+            document.getElementById("resultKristall").textContent = totalKristall.toLocaleString('de-DE');
+            document.getElementById("resultDeuterium").textContent = totalDeuterium.toLocaleString('de-DE');
+        }
+
+        document.getElementById("calculateButton").addEventListener("click", calculateResources);
+    </script>
 </body>
 </html>
