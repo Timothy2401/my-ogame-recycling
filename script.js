@@ -1,4 +1,4 @@
-// Ressourcen-Kosten für jedes Schiff
+// Schiffskosten
 const shipCosts = {
     "Leichter Jäger": { metal: 3000, crystal: 1000, deuterium: 0 },
     "Schwerer Jäger": { metal: 6000, crystal: 4000, deuterium: 0 },
@@ -19,54 +19,31 @@ const shipCosts = {
 
 // Berechnung der Ressourcen
 function calculateResources() {
-    // Prozentsatz abrufen
     const percentageInput = document.getElementById("percentage").value;
     const percentage = parseFloat(percentageInput) / 100;
 
-    // Überprüfen, ob der Prozentsatz gültig ist
     if (isNaN(percentage) || percentage < 0.35 || percentage > 0.75) {
-        alert("Bitte geben Sie einen Prozentsatz zwischen 35% und 75% ein.");
+        alert("Bitte geben Sie einen gültigen Prozentsatz ein (35%-75%)!");
         return;
     }
 
-    // Ressourcen summieren
     let totalMetall = 0;
     let totalKristall = 0;
     let totalDeuterium = 0;
 
-    // Iteration über die Schiffe
     Object.entries(shipCosts).forEach(([shipType, costs], index) => {
-        // Eingabewert abrufen
         const inputField = document.getElementById(`input${index + 1}`);
         const quantity = parseInt(inputField.value) || 0;
 
-        // Ressourcenberechnung
         totalMetall += costs.metal * quantity * percentage;
         totalKristall += costs.crystal * quantity * percentage;
         totalDeuterium += costs.deuterium * quantity * percentage;
     });
 
-    // Ergebnisse anzeigen
     document.getElementById("resultMetall").textContent = totalMetall.toLocaleString('de-DE');
     document.getElementById("resultKristall").textContent = totalKristall.toLocaleString('de-DE');
     document.getElementById("resultDeuterium").textContent = totalDeuterium.toLocaleString('de-DE');
 }
 
-// Sprachwechsel
-document.getElementById("language-select").addEventListener("change", function (event) {
-    const language = event.target.value;
-    const t = translations[language];
-
-    // Übersetzte Inhalte setzen
-    document.getElementById("pageTitle").textContent = t.pageTitle;
-    document.getElementById("shipTypeHeader").textContent = t.shipTypeHeader;
-    document.getElementById("quantityHeader").textContent = t.quantityHeader;
-    document.querySelector("label[for='percentage']").textContent = t.percentageLabel;
-    document.querySelector("button").textContent = t.calculateButton;
-    document.querySelector("h2").textContent = t.resultTitle;
-
-    // Schiffstypen
-    t.shipTypes.forEach((type, index) => {
-        document.getElementById(`shipType${index + 1}`).textContent = type;
-    });
-});
+// Sprachumschaltung vorbereiten (Falls benötigt)
+document.getElementById("calculateButton").addEventListener("click", calculateResources);
