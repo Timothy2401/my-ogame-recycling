@@ -1,0 +1,54 @@
+/* Globales Styling */
+body {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+/* Tabelle */
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 50%;
+    background-color: black;
+    color: white;
+    border: 2px solid #444;
+}
+
+th, td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+    font-weight: bold;
+}
+
+td input {
+    width: 60px;
+}
+
+/* Überschriften */
+h1 {
+    font-size: 2.5em;
+    margin: 20px 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 30px;
+}
+
+/* Sprachumschaltung */
+label, select {
+    margin: 10px;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ogame Schiff-Recycling</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="pageTitle">Ogame Schiff-Recycling</h1>
+    
+    <!-- Sprachumschaltung -->
+    <label for="language-select">Select language:</label>
+    <select id="language-select">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+    </select>
+
+    <!-- Tabelle -->
+    <table>
+        <thead>
+            <tr>
+                <th id="shipTypeHeader">Schiffstyp</th>
+                <th id="quantityHeader">Eingabewert</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Reihen für die Schiffe -->
+            <tr>
+                <td id="shipType1">Leichter Jäger</td>
+                <td><input type="number" id="input1" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType2">Schwerer Jäger</td>
+                <td><input type="number" id="input2" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType3">Kreuzer</td>
+                <td><input type="number" id="input3" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType4">Schlachtschiff</td>
+                <td><input type="number" id="input4" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType5">Schlachtkreuzer</td>
+                <td><input type="number" id="input5" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType6">Bomber</td>
+                <td><input type="number" id="input6" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType7">Zerstörer</td>
+                <td><input type="number" id="input7" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType8">Todesstern</td>
+                <td><input type="number" id="input8" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType9">Reaper</td>
+                <td><input type="number" id="input9" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType10">Pathfinder</td>
+                <td><input type="number" id="input10" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType11">K-Transporter</td>
+                <td><input type="number" id="input11" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType12">G-Transporter</td>
+                <td><input type="number" id="input12" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType13">Kolonieschiff</td>
+                <td><input type="number" id="input13" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType14">Recycler</td>
+                <td><input type="number" id="input14" min="0"></td>
+            </tr>
+            <tr>
+                <td id="shipType15">Spionagesonde</td>
+                <td><input type="number" id="input15" min="0"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Prozentangabe -->
+    <label for="percentage" id="percentageLabel">Wähle den Prozentsatz (35 % - 75 %):</label>
+    <input type="number" id="percentage" min="35" max="75" value="35">
+
+    <!-- Berechnen-Button -->
+    <button onclick="calculateResources()" id="calculateButton">Berechnen</button>
+
+    <!-- Ergebnisse -->
+    <h2 id="resultTitle">Ergebnis:</h2>
+    <p>Metall: <span id="resultMetall">0</span></p>
+    <p>Kristall: <span id="resultKristall">0</span></p>
+    <p>Deuterium: <span id="resultDeuterium">0</span></p>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
