@@ -4,17 +4,17 @@ const shipCosts = {
     "Schwerer Jäger": { metal: 6000, crystal: 4000, deuterium: 1000 },
     "Kreuzer": { metal: 2000, crystal: 2000, deuterium: 500 },
     "Schlachtschiff": { metal: 7000, crystal: 4000, deuterium: 1000 },
-    "Schlachtkreuzer": { metal: 30000, crystal: 40000, deuterium: 15000 }, // Korrektur
+    "Schlachtkreuzer": { metal: 30000, crystal: 40000, deuterium: 15000 },
     "Bomber": { metal: 5000, crystal: 3000, deuterium: 1000 },
-    "Zerstörer": { metal: 6000, crystal: 2000, deuterium: 500 },
+    "Zerstörer": { metal: 6000, crystal: 2000, deuterium: 500 }, 
     "Todesstern": { metal: 50000, crystal: 30000, deuterium: 10000 },
     "Reaper": { metal: 10000, crystal: 10000, deuterium: 4000 },
     "Pathfinder": { metal: 8000, crystal: 15000, deuterium: 8000 },
-    "K-Transporter": { metal: 2000, crystal: 2000, deuterium: 0 }, // Korrektur
-    "G-Transporter": { metal: 6000, crystal: 6000, deuterium: 0 }, // Korrektur
-    "Kolonieschiff": { metal: 10000, crystal: 20000, deuterium: 10000 }, // Korrektur
-    "Recycler": { metal: 10000, crystal: 6000, deuterium: 2000 }, // Korrektur
-    "Spionagesonde": { metal: 0, crystal: 1000, deuterium: 0 } // Korrektur
+    "K-Transporter": { metal: 2000, crystal: 2000, deuterium: 0 },
+    "G-Transporter": { metal: 6000, crystal: 6000, deuterium: 0 },
+    "Kolonieschiff": { metal: 10000, crystal: 20000, deuterium: 10000 },
+    "Recycler": { metal: 10000, crystal: 6000, deuterium: 2000 },
+    "Spionagesonde": { metal: 0, crystal: 1000, deuterium: 0 }
 };
 
 // Übersetzungen
@@ -54,9 +54,10 @@ function calculateResources() {
     let totalKristall = 0;
     let totalDeuterium = 0;
 
-    for (let i = 0; i < shipCosts.length; i++) {
+    // Iterieren über das shipCosts Objekt
+    for (let i = 0; i < Object.keys(shipCosts).length; i++) {
+        let shipType = Object.keys(shipCosts)[i];
         let quantity = parseInt(document.getElementById(`input${i + 1}`).value) || 0;
-        let shipType = document.getElementById(`shipType${i + 1}`).textContent;
 
         totalMetall += shipCosts[shipType].metal * quantity * percentage;
         totalKristall += shipCosts[shipType].crystal * quantity * percentage;
